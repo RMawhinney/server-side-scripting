@@ -1,0 +1,55 @@
+package main
+
+import "fmt"
+
+//#3
+type person struct {
+	fName string
+	lName string
+}
+
+//#5
+type Person struct {
+	fName   string
+	lName   string
+	favFood []string
+}
+
+//#6
+func (p person) walk() {
+	fmt.Println(p.fName, "is walking")
+}
+
+func main() {
+	//#1
+	x := []int{03, 30, 2019, 04, 01}
+	fmt.Println(x)
+	for i, _ := range x {
+		fmt.Println(i, "-", x[i])
+	}
+	//#2
+	m := map[string]int{"Sean": 24, "Rupert": 78, "Xeno": 25}
+	fmt.Println(m)
+	for k, _ := range m {
+		fmt.Println(k)
+	}
+	for k, v := range m {
+		fmt.Println(k, "-", v)
+	}
+	//#4
+	p1 := person{"Sean", "Macreedy"}
+	fmt.Println(p1, p1.fName)
+
+	//#5
+	P2 := Person{"Rupert",
+		"Datsyuk",
+		[]string{"vodka", "meat"},
+	}
+	fmt.Println(P2.favFood)
+	for k, v := range P2.favFood {
+		fmt.Println(k, "-", v)
+	}
+
+	//#6
+	p1.walk()
+}
