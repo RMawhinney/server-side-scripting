@@ -1,0 +1,18 @@
+body {
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	flex-flow: column;
+}
+
+
+img {
+	margin: 20px auto;
+}
+
+h1 {
+	color: slateblue;
+}
+

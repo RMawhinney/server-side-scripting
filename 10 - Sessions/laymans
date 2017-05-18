@@ -1,0 +1,89 @@
+*function*
+[form]
+{data}
+(page)
+
+(Pages): Home, SignUp, LogIn, Bar <-Links Universal
+structure: dbUsers[string]user where string=email and user=user values{email, password, first, last}
+			dbSessions[string]string where [string]=
+			
+
+(Home
+	Options: 
+	*access* <
+	IF false; Universal Links
+	IF true; Bar, *logOut* function>
+	*roleCall*
+)
+
+(SignUp
+	*checkAccess*<
+	IF true; *alreadyIn*
+	IF false; continue>
+	Options: Universal
+	[email{e}] [password{p}] [first{f}] [last{l}] 
+	SUBMIT = MethodPost
+		CHECK email entered with email in dbUsers<
+			IF email{e} = users{email}; message "Username Taken"
+			IF email{e} =/= users{email; continue} >
+		store {e, p, f, l} within dbUsers as new User
+
+	*logIn*
+
+)
+
+(LogIn
+*checkAccess*<IF true; *alreadyIn*
+		IF false; continue>
+	options: SignUp, LogIn
+		[login {email}] [login {password}]
+		LOGIN = 
+
+				CHECK login{email} with range of dbUsers{email}<
+					IF there is no match; *wrongEntry* 
+					IF there is a match; continue>
+
+				CHECK login{password} with the dbUsers{password} associated with dbUsers{email} <
+					IF login{password} =/= dbUsers[email]{password}; *wrongEntry*
+					IF login{password} = dbUsers[email]{password}; continue>
+
+					*logIn*
+					
+					redirect to (Home)
+)
+
+(Bar
+	*checkAccess* <
+	IF false; *needAccess*
+	IF true; continue>
+
+	*roleCall*
+	message "Welcome"
+)
+
+
+
+
+
+*wrongEntry*
+	[message "Incorrect email/password", clear [login{email}] and [login{password}] fields]
+
+*logIn*
+	[creates Cookie "Sessions" where Value=uuid on user's browser
+	creates record in dbSessions of [uuid]email] 	
+
+*logOut*
+	[find session within dbSessions where user's Cookie "Session" value = [uuid]email
+	clear cookie on user's browser
+	message "Logging out", redirect to (Home)
+	]
+
+*checkAccess*
+	CHECK user's browser[IF no Cookie "Session"; return false
+	IF Cookie; return true]
+
+*alreadyIn*
+	[message "You are already logged in!", redirect to (Home)]
+
+*needAccess*
+	[message "You need to be logged in to reach the Bar", redirect to (LogIn)]

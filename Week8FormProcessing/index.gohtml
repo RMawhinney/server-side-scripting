@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>INDEX</title>
+</head>
+<body>
+<h1>DATA ENTRY: YOUR GUIILD</h1>
+{{if .Name}}
+Name: {{.Name}}
+<br>
+Guild: {{.Guild}}
+<br>
+Rank: {{.Rank}}
+<br>
+{{end}}
+
+<form action="/" method="post">
+<input type="text" name="name" placeholder="Name">
+<input type="text" name="guild" placeholder="Guild">
+<input type="text" name="rank" placeholder="Rank">
+<input type="submit" name="">
+</form>
+</body>
+</html>

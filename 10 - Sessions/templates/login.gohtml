@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LOGIN</title>
+</head>
+<body>
+<h1>GO TO THE BAR?</h1>
+
+{{if .First}}
+Email: {{.Email}}
+<br>
+Password: {{.Password}}
+<br>
+First: {{.First}}
+<br>
+Last: {{.Last}}
+<br>
+{{end}}
+
+<form action="/signup" method="post">
+<input type="text" name="email" placeholder="email">
+<input type="password" name="password" placeholder="password">
+<input type="submit" name="">
+</form>
+
+</body>
