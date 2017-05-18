@@ -13,9 +13,8 @@ func init() {
 
 func main() {
 	http.HandleFunc("/", index)	
-	http.Handle("/assets/", http.StripPrefix("/assets", http.FileServer(http.Dir("./assets"))))
 	http.HandleFunc("/main.css", css)
-	http.HandleFunc("favicon.ico", favicon)
+	http.HandleFunc("/favicon.ico", favicon)
 	http.ListenAndServe(":8080", nil)
 }
 
@@ -24,9 +23,9 @@ func index (w http.ResponseWriter, r *http.Request) {
 }
 
 func css (w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "main.css")
+		http.ServeFile(w, r, "templates/main.css")
 }
 
 func favicon (w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "assets/favicon.ico")
+		http.ServeFile(w, r, "templates/favicon.ico")
 }
