@@ -11,7 +11,7 @@ func init(){
 
 func main () {
 	http.HandleFunc("/", thursday)
-	http.HandleFunc("/thursday.png", pic)
+	http.HandleFunc("/tuesday.jpg", pic)
 	http.HandleFunc("/main.css", css)
 	http.ListenAndServe(":8080", nil)
 }
@@ -21,7 +21,7 @@ func thursday (w http.ResponseWriter, r *http.Request) {
 }
 
 func pic (w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "thursday.png")
+	http.ServeFile(w, r, "tuesday.jpg")
 }
 
 func css (w http.ResponseWriter, r *http.Request) {
